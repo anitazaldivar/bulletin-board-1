@@ -34,13 +34,8 @@
         <input type="date" id="expires_on_box" name="query_expires_on">
       </div>
 
-      <div>
-        <label for="board_id_box">
-          Board ID
-        </label>
+      <input type="hidden" id="board_id_box" name="query_board_id" value="<%= @the_board.id%>">
 
-        <input type="text" id="board_id_box" name="query_board_id">
-      </div>
 
       <button>
         Create post
@@ -71,7 +66,7 @@
           </th>
         </tr>
 
-        <% @the_board.posts.each do |a_post| %>
+        <% @the_board.posts.order({ :expires_on => :asc}).each do |a_post| %>
           <tr>
             <td>
               <%= a_post.title %>
@@ -82,11 +77,11 @@
             </td>
 
             <td>
-              <%= a_post.created_at %>
+              <%= a_post.created_at.strftime("%b %e, %Y") %>
             </td>
 
             <td>
-              <%= a_post.expires_on %>
+              <%= a_post.expires_on.strftime("%b %e, %Y") %>
             </td>
           </tr>
         <% end %>

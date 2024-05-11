@@ -8,4 +8,5 @@
 #  updated_at :datetime         not null
 #
 class Board < ApplicationRecord
+  has_many(:posts, class_name: "Post", foreign_key: "board_id")
 end
